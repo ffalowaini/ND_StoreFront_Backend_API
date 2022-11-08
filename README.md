@@ -31,9 +31,15 @@ Statuses
 
 Order
     id --  serial -- primary key
-    productId -- int
     statusId -- int
     userId -- int
+
+productOrder
+    id -- serial -- primary key
+    productId -- int
+    quantity -- int
+    orderId -- int
+
 
 
 ## Environment variable
@@ -67,3 +73,5 @@ ENV=dev
 
 #### Orders
 - Current Order by user (args: user id)[token required] -- http://localhost:3000/orders [get]
+- Create Order [token required]  -- http://localhost:3000/orders [post]
+- Add Product To Order [token required] -- http://localhost:3000/orders [post]

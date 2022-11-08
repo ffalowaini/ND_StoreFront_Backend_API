@@ -2,18 +2,23 @@ import Client from "../database";
 
 export type OrderModel = {
   id?: Number;
-  productId: Number;
   userId: Number;
   statusId: Number;
+};
+export type ProductOrderModel = {
+  id?: Number;
+  orderId: Number;
+  productId: Number;
   quantity: Number;
 };
+
 
 export class Order {
   async index(): Promise<OrderModel[]> {
     try {
       // @ts-ignore
       const conn = await Client.connect();
-      const sql = "SELECT * FROM order";
+      const sql = "SELECT * FROM orders";
 
       const result = await conn.query(sql);
 
@@ -27,7 +32,7 @@ export class Order {
 
   async show(id: string): Promise<OrderModel> {
     try {
-      const sql = "SELECT * FROM order WHERE id=($1)";
+      const sql = "SELECT * FROM orders WHERE id=($1)";
       // @ts-ignore
       const conn = await Client.connect();
 
@@ -44,11 +49,11 @@ export class Order {
   async create(b: OrderModel): Promise<OrderModel> {
     try {
       const sql =
-        "INSERT INTO product (productId, quantity, userId, statusId) VALUES($1, $2, $3, 44) RETURNING *";
+        "INSERT INTO orders (userId, statusId) VALUES($1, $2, $3, 44) RETURNING *";
       // @ts-ignore
       const conn = await Client.connect();
 
-      const result = await conn.query(sql, [b.productId, b.quantity, b.userId, b.statusId]);
+      const result = await conn.query(sql, [b.userId, b.statusId]);
 
       const book = result.rows[0];
 
@@ -56,13 +61,13 @@ export class Order {
 
       return book;
     } catch (err) {
-      throw new Error(`Could not add new book ${b.productId}. Error: ${err}`);
+      throw new Error(`Could not add new order ${b.userId}. Error: ${err}`);
     }
   }
 
   async delete(id: string): Promise<OrderModel> {
     try {
-      const sql = "DELETE FROM product WHERE id=($1)";
+      const sql = "DELETE FROM orders WHERE id=($1)";
       // @ts-ignore
       const conn = await Client.connect();
 
@@ -74,27 +79,27 @@ export class Order {
 
       return book;
     } catch (err) {
-      throw new Error(`Could not delete book ${id}. Error: ${err}`);
+      throw new Error(`Could not delete order ${id}. Error: ${err}`);
     }
   }
 
 
-  // async addProduct(quantity: number, orderId: string, productId: string): Promise<OrderModel> {
-  //   try {
-  //     const sql = 'INSERT INTO order (quantity, order_id, product_id) VALUES($1, $2, $3) RETURNING *'
-  //     //@ts-ignore
-  //     const conn = await Client.connect()
+  async addProduct(b :ProductOrderModel): Promise<ProductOrderModel> {
+    try {
+      const sql = 'INSERT INTO productOrder (quantity, productId, orderId) VALUES($1, $2, $3) RETURNING *'
+      //@ts-ignore
+      const conn = await Client.connect()
 
-  //     const result = await conn
-  //         .query(sql, [quantity, orderId, productId])
+      const result = await conn
+          .query(sql, [b.quantity, b.productId, b.orderId])
 
-  //     const order = result.rows[0]
+      const order = result.rows[0]
 
-  //     conn.release()
+      conn.release()
 
-  //     return order
-  //   } catch (err) {
-  //     throw new Error(`Could not add product ${productId} to order ${orderId}: ${err}`)
-  //   }
-  // }
+      return order
+    } catch (err) {
+      throw new Error(`Could not add product ${b.productId} to order ${b.orderId}: ${err}`)
+    }
+  }
 }
