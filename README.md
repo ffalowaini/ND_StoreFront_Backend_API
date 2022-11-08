@@ -1,10 +1,53 @@
 # ND_StoreFront_Backend_API
 
 ## Running Script
+- First run "npm i" to install required packages
+- create new db with name "online-store" & "online-store-test" then run the migration by "db-migrate up"
 - To build the project use: "npm run build"
 - To run Jasmine unit testing use: "npm run test"
 - To run the project use: "npm run start"
 - To run the project after build use: "node ./build"
+
+## DataSorce
+- port -- 5432
+- ip -- localhost
+- db name -- online-store
+- db schema
+
+Product 
+    id -- serial -- primary key
+    name -- varchar
+    price -- int
+
+Users
+    id -- serial -- primary key
+    firstName -- varchar
+    lastName -- varchar
+    password -- varchar
+
+Statuses
+    id -- serial -- primary key
+    name -- varchar
+
+Order
+    id --  serial -- primary key
+    productId -- int
+    statusId -- int
+    userId -- int
+
+
+## Environment variable
+POSTGRES_HOST= 127.0.0.1
+POSTGRES_DB=online-store
+POSTGRES_TEST_DB=online-store-test
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=password123
+BCRYPT_PASSWORD=test
+SALT_ROUNDS=10
+TOKEN_SECRET=test123
+ENV=dev
+
+
 
 
 ## Endpoints to test see the project
