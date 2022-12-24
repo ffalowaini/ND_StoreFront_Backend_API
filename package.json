@@ -10,7 +10,7 @@
     "prettier": "prettier --config .prettierrc \"src/**/*.ts\" --write",
     "test": "ENV=test && npx tsc && db-migrate --env test up && jasmine && db-migrate db:drop test",
     "lint": "eslint . --ext .ts",
-    "deploy":  "chmod +x ./bin/deploy.sh && ./bin/deploy.sh"
+    "deploy": "chmod +x ./bin/deploy.sh && ./bin/deploy.sh"
   },
   "author": "Udacity",
   "license": "ISC",
@@ -21,7 +21,7 @@
     "db-migrate-pg": "^1.2.2",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "nodemon": "^2.0.20",
     "pg": "^8.5.1",
     "ts-node": "^10.9.1",
