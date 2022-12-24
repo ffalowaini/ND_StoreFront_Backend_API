@@ -41,7 +41,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 var database_1 = __importDefault(require("../database"));
-var bcryptjs_1 = __importDefault(require("bcryptjs"));
+var bcrypt_1 = __importDefault(require("bcrypt"));
 var _a = process === null || process === void 0 ? void 0 : process.env, pepper = _a.BCRYPT_PASSWORD, saltRounds = _a.SALT_ROUNDS;
 var User = /** @class */ (function () {
     function User() {
@@ -105,7 +105,7 @@ var User = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        hash = bcryptjs_1.default.hashSync(b.password + pepper, parseInt(saltRounds));
+                        hash = bcrypt_1.default.hashSync(b.password + pepper, parseInt(saltRounds));
                         return [4 /*yield*/, conn.query(sql, [b.firstName, b.lastName, hash])];
                     case 2:
                         result = _a.sent();

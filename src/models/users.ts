@@ -1,5 +1,5 @@
 import Client from "../database";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 
 export type UserModel = {
   id?: Number;
