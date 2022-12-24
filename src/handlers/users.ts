@@ -1,5 +1,4 @@
 import express, { Request, Response } from 'express'
-import { Product, ProductModel } from '../models/product'
 import { User, UserModel } from '../models/users'
 import jwt from "jsonwebtoken";
 import verifyAuthToken from '../middlewares/validateJWT';

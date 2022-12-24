@@ -1,8 +1,6 @@
 import express, { Request, Response } from 'express'
 import verifyAuthToken from '../middlewares/validateJWT'
 import { Order, OrderModel, ProductOrderModel } from '../models/order'
-import { Product, ProductModel } from '../models/product'
-import { User, UserModel } from '../models/users'
 
 const store = new Order()
 
