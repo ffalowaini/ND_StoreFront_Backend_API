@@ -1,0 +1,16 @@
+{
+    "dev": {
+      "driver": "pg",
+      "host": "store-1.chhr0tanwlhe.us-east-1.rds.amazonaws.com",
+      "database": "postgres",
+      "user": "postgres",
+      "password": "Work.,12321"
+    },
+    "test": {
+      "driver": "pg",
+      "host": "127.0.0.1",
+      "database": "online-store-test",
+      "user": "postgres",
+      "password": "password123"
+    }
+  }
