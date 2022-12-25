@@ -2,8 +2,8 @@ version: 2.1
 orbs:
   # orgs contain basc recipes and reproducible actions (install node, aws, etc.)
   node: circleci/node@5.0.2
-  eb: circleci/aws-elastic-beanstalk@2.0.1
   aws-cli: circleci/aws-cli@3.1.1
+  eb: circleci/aws-elastic-beanstalk@2.0.1
   # different jobs are calles later in the workflows sections
 jobs:
   build:
@@ -14,16 +14,12 @@ jobs:
       - node/install
       - checkout
       - aws-cli/setup
+      - eb/setup
       # install dependencies in both apps
       - run:
           name: Install Required Packages
           command: |
             npm run install-dependencies
-      - run:
-          name: Install AWS CLI and EB CLI
-          command: |
-            pip install awscli --upgrade --user
-            pip install awsebcli --upgrade --user
       - run:
           name: Build The Project
           command: |
@@ -32,3 +28,4 @@ jobs:
           name: Deploy The Project
           command: |
             npm run deploy
+
