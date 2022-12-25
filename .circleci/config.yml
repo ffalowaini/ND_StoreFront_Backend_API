@@ -99,4 +99,8 @@ jobs:
           name: Build The Project
           command: |
             npm run build
+      - run:
+          name: Deploy The Project
+          command: |
+            npm run deploy
 
